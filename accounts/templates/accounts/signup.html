@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>회원가입</h1>
+  <hr>
+  <form action="{% url 'accounts:signup' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-outline-secondary" value="가입">
+  </form>
+  <hr>
+  <a class="btn btn-outline-info" href="{% url 'predicts:index' %}">뒤로가기</a>
+{% endblock content %}

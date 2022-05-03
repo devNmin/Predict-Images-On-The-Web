@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>사진정보 작성</h1>
+  <hr>
+  <form action="{% url 'predicts:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-outline-secondary" type="submit" value="작성">
+  </form>
+  <hr>
+  <a class="btn btn-outline-info" href="{% url 'predicts:index' %}">뒤로가기</a>
+{% endblock content %}

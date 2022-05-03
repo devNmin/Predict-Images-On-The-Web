@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{person.username}}</h2>
+<div class="row">
+  {% for predict in person.like_predicts.all %}
+  <article class="col-sm-6 col-md-4">
+    <div class="card">
+      <img src="{{ predict.poster_url.url }}" width="370px" height="400px" class="card-img-top" alt="...">
+      <div class="card-body">
+        <form action="{%url 'predicts:like' predict.pk %}" method="POST">
+          {% csrf_token %}
+          <button class="btn p-0">
+
+            {% if request.user in predict.like_users.all %}
+            <i class="fa-solid fa-heart text-danger"></i>
+            <small>{{request.user}}님을 포함한 {{predict.like_users.count}}명이 좋아합니다.</small>
+            {% else %}
+            <i class="fa-regular fa-heart"></i>
+
+            {% endif %}
+
+          </button>
+        </form>
+        <h5 class="card-title">{{predict.title}}</h5>
+        <a class="btn btn-success" href="{% url 'predicts:detail' predict.pk %}">상세정보</a>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
+{% endblock content %}
