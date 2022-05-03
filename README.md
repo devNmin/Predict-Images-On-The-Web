@@ -3,7 +3,7 @@
 
 
 ## Introduction
-<img src="/images/intro.png">
+<img src="./images/intro.png">
 
 This page is to predict images on the web using keras models.
 
@@ -14,3 +14,4 @@ This page is to predict images on the web using keras models.
 
 
 ## Tutorial
+
