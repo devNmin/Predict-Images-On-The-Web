@@ -24,13 +24,12 @@ def create(request):
         form = PredictForm(request.POST,request.FILES)
         print("**************")
         path = f"./media/images/{request.FILES['poster_url']}"
-        values = predict_file(path)
-        # print(values)
-        # form.predict_name = values
         print("**************")
         if form.is_valid():
             predict = form.save(commit=False)
             predict.user = request.user
+            predict.save()
+            values = predict_file(path)
             predict.predict_name=values
             predict.save()
             print("asdasdasdasd",predict.predict_name)
