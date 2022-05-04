@@ -29,14 +29,14 @@
     <a class="btn btn-outline-secondary" href="{% url 'predicts:update' predict.pk %}">수정</a>
     <form action="{% url 'predicts:delete' predict.pk %}" method="POST">
       {% csrf_token %}
-      <input class="btn btn-outline-danger" type="submit" value="삭제">
+      <input id='deleteBtn' class="btn btn-outline-danger" type="submit" value="삭제">
     </form>
 
   {% endif %}
 </div>
 
   <hr>
-  <h1>예측 결과는 : <span id='answer' style="color:white"  onmouseover=answer_onmouseover() onmouseout=answer_onmouseout()  >{{values}}</span> </h1>
+  <h1>예측 결과는 : <span id='answer' style="color:white"  onmouseover=answer_onmouseover() onmouseout=answer_onmouseout()  >{{predict.predict_name}}</span> </h1>
 
   <a  target='_blank' href="https://www.google.com/search?q={{values}}&tbm=isch&ved=2ahUKEwjX7pbkobn3AhVPA6YKHQXZAf4Q2-cCegQIABAA&oq=Persian_cat&gs_lcp=CgNpbWcQAzIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCCMQ7wMQJ1DRAljRAmDsBGgAcAB4AIABeIgB7AGSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=x9hrYpfvDM-GmAWFsofwDw&bih=880&biw=1104">
     {{values}}가 뭔지 궁금하신가요? 궁금하시다면 눌러주세요!</a>
@@ -60,7 +60,7 @@
           <form action="{% url 'predicts:comment_delete' predict.pk comment.pk %}" method="POST">
             {% csrf_token %}
             <div class="my-1">
-            <input type="submit" class="btn btn-sm btn-outline-secondary mx-2" value="삭제">
+            <input  type="submit" class="btn btn-sm btn-outline-secondary mx-2" value="삭제">
             </div>
           </form>
         {% endif %}
@@ -86,15 +86,14 @@
       function answer_onmouseover(){
           const answerTag = document.getElementById('answer')
           answerTag.style.color = "black"
-
-
       }
       function answer_onmouseout(){
           const answerTag = document.getElementById('answer')
           answerTag.style.color = "white"
-
-
       }
+      const deleteBtn = document.getElementById('deleteBtn')
+
+      
   </script>
 
 {% endblock content %}

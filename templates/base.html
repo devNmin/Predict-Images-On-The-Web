@@ -17,6 +17,7 @@
     }
     #blackButton {
         background: black;
+        
     }
     #whiteButton {
       background: white;
@@ -24,11 +25,11 @@
   </style>
 </head>
 <body>
-    <ul class="switcher list-unstyled m-1 p-0 overflow-hidden">
-    <li class="float-start " style="width: 20px; height: 20px ; margin: 0 15px 15px 0; border-radius: 18px; border: 3px solid black; " id="blackButton"></li>
-    <li class="float-start " style="width: 20px; height: 20px ; margin: 0 15px 15px 0; border-radius: 18px; border: 3px solid black; " id="whiteButton"></li>
-    </ul>
-  {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+  <ul class="sticky-top switcher list-unstyled m-1 p-0 overflow-hidden">
+  <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 5px 15px 0; border-radius: 18px; border: 3px solid black; " id="blackButton"></li>
+  <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 15px 15px 0; border-radius: 18px; border: 3px solid black; " id="whiteButton"></li>
+  </ul>
+  
   <div class="container">
   {% if request.user.is_authenticated %}
   <nav id='navid' class="sticky-top navbar navbar-expand-lg navbar-light bg-light px-0">
@@ -56,7 +57,7 @@
       </div>
     </div>
   </nav>
-   <br>
+  <br>
   {% else %}
   <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -76,69 +77,29 @@
   <br>
   {% endif %}
 
-    {% block content %}
-    {% endblock content %}
+  {% block content %}
+  {% endblock content %}
   </div>
-  {% comment %} <div class="container">
-    {% if request.user.is_authenticated %}
-      <h3>안녕? {{ user }}</h3>
-
-      <form action="{% url 'accounts:logout' %}" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-outline-dark" type="submit" value="로그아웃">
-      </form>
-      <a class="btn btn-outline-secondary" href="{% url 'accounts:update' %}">회원정보 수정</a>
-      <form action="{% url 'accounts:delete' %}" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-outline-dark" type="submit" value="회원탈퇴">
-      </form>
-    {% else %}
-      <a class="btn btn-outline-primary" href="{% url 'accounts:login' %}">로그인</a>
-      <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">회원가입</a>
-    {% endif %}
-
-
-    {% block content %}
-    {% endblock content %} {% endcomment %}
-  {% comment %} </div>
-  <div class="container">
-    {% if request.user.is_authenticated %}
-      <h3>안녕? {{ user }}</h3>
-
-      <form action="{% url 'accounts:logout' %}" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-outline-dark" type="submit" value="로그아웃">
-      </form>
-      <a class="btn btn-outline-secondary" href="{% url 'accounts:update' %}">회원정보 수정</a>
-      <form action="{% url 'accounts:delete' %}" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-outline-dark" type="submit" value="회원탈퇴">
-      </form>
-    {% else %}
-      <a class="btn btn-outline-primary" href="{% url 'accounts:login' %}">로그인</a>
-      <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">회원가입</a>
-    {% endif %}
-
-
-
-  </div> {% endcomment %}
+  
   <script>
-      const Liblack = document.getElementById('blackButton')
-    const Liwhite = document.getElementById('whiteButton')
-    const Linavy = document.getElementById('navyButton')
+    const blackBtn = document.getElementById('blackButton')
+    const whiteBtn = document.getElementById('whiteButton')
+    const navTag = document.getElementById('navid')
 
-    Liblack.addEventListener('click',backgroundblack)
-    Liwhite.addEventListener('click',backgroundwhite)
+    blackBtn.addEventListener('click',balckTheme)
+    whiteBtn.addEventListener('click',whiteTheme)
 
-    function backgroundblack(){
-        const navTag = document.getElementById('navid')
-
+    function balckTheme(){
+      
+      
       document.body.style.backgroundColor = 'black'
-      document.body.style.color = 'white'
+      
+      {% comment %} document.body.style.color = 'white' {% endcomment %}
     }
-    function backgroundwhite(){
+    function whiteTheme(){
       document.body.style.backgroundColor = 'white'
-      document.body.style.color = 'black'
+      
+      {% comment %} document.body.style.color = 'black' {% endcomment %}
     }
   </script>
   <script src="https://kit.fontawesome.com/b9e53f5e9e.js" crossorigin="anonymous"></script>

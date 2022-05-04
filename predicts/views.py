@@ -22,13 +22,18 @@ def index(request):
 def create(request):
     if request.method == 'POST':
         form = PredictForm(request.POST,request.FILES)
-
+        print("**************")
+        path = f"./media/images/{request.FILES['poster_url']}"
+        values = predict_file(path)
+        # print(values)
+        # form.predict_name = values
+        print("**************")
         if form.is_valid():
             predict = form.save(commit=False)
             predict.user = request.user
+            predict.predict_name=values
             predict.save()
-
-
+            print("asdasdasdasd",predict.predict_name)
             return redirect('predicts:detail', predict.pk)
     else:
         form = PredictForm()
@@ -45,20 +50,9 @@ def detail(request, pk):
     comment_form = CommentForm()
     comments = predict.comment_set.all()
 
-    print("#############################")
 
-
-    # path = f"/home/JoKyungmin/config/media/{predict.poster_url.name}"
-    path = f"./media/{predict.poster_url.name}"
-
-    values = predict_file(path)
-
-
-    print("결과는~~~~~~~~~~~~~",values)
-    print("#############################")
 
     context = {
-        'values': values,
         'predict': predict,
         'comment_form': comment_form,
         'comments': comments,
@@ -135,7 +129,6 @@ def likes(request, predict_pk):
         liked = True
 
     context = {
-        'vvvv': 5,
         'liked': liked,
         'count': predict.like_users.count()
     }

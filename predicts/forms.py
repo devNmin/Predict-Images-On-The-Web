@@ -1,7 +1,6 @@
 from django import forms
 from .models import Predict, Comment
 
-
 class PredictForm(forms.ModelForm):
     title = forms.CharField(
         label='제목',
@@ -32,7 +31,7 @@ class PredictForm(forms.ModelForm):
     )
     class Meta:
         model = Predict
-        exclude = ('user','like_users',)
+        exclude = ('user','like_users','predict_name',)
 
 
 class CommentForm(forms.ModelForm):
@@ -49,4 +48,3 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
-
