@@ -80,6 +80,11 @@
 
   {% block content %}
   {% endblock content %}
+    <a id='upscroll' style="display:scroll; position:fixed; bottom:5px; right:10px;" >
+      <i class="fa-solid fa-angle-up"></i>
+    </a>
+
+    
   </div>
   
   <script>
@@ -87,10 +92,12 @@
     const blackBtn = document.getElementById('blackButton')
     const whiteBtn = document.getElementById('whiteButton')
     const navTag = document.getElementById('navid')
-
+    const upscroll = document.getElementById('upscroll')
     blackBtn.addEventListener('click',balckTheme)
     whiteBtn.addEventListener('click',whiteTheme)
-
+    upscroll.addEventListener('click',function(){
+      document.body.scrollIntoView()
+    })
     function balckTheme(){
       
       
