@@ -26,12 +26,13 @@
 </head>
 <body>
   <ul class="sticky-top switcher list-unstyled m-1 p-0 overflow-hidden">
-  <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 5px 15px 0; border-radius: 18px; border: 3px solid black; " id="blackButton"></li>
-  <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 15px 15px 0; border-radius: 18px; border: 3px solid black; " id="whiteButton"></li>
+    <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 5px 15px 0; border-radius: 18px; border: 3px solid black; " id="blackButton"></li>
+    <li class="float-start " style="width: 18px; height: 18px ; margin: 10px 15px 15px 0; border-radius: 18px; border: 3px solid black; " id="whiteButton"></li>
   </ul>
   
   <div class="container">
   {% if request.user.is_authenticated %}
+  {% comment %}   {% endcomment %}
   <nav id='navid' class="sticky-top navbar navbar-expand-lg navbar-light bg-light px-0">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="{%url 'predicts:index'%}"><img src="{% static  'images/home.png' %}" href="{%url 'predicts:index'%}" alt="Home" style="width: 50px;"></a>
@@ -94,7 +95,7 @@
       
       
       document.body.style.backgroundColor = 'black'
-      
+ 
       {% comment %} document.body.style.color = 'white' {% endcomment %}
     }
     function whiteTheme(){
