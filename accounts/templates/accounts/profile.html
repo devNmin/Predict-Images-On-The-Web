@@ -3,7 +3,6 @@
 {% block content %}
 <h2>{{person.username}}</h2> 
 
-<h2>zxdads</h2>
 <div class="row">
   {% for predict in person.like_images.all %}
   <article class="col-sm-6 col-md-4">
@@ -21,5 +20,8 @@
   </article>
   {% endfor %}
 </div>
+<script>
+  document.title = 'profile'
+</script>
 
 {% endblock content %}
