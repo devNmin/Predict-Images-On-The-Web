@@ -5,7 +5,7 @@
 ## Introduction
 <img src="./images/Intro.PNG">
 
-This page is to predict images on the web using keras models.
+This page is to predict images on the web using [keras models](https://keras.io/api/applications/mobilenet/#mobilenetv2-function).
 
 
 
