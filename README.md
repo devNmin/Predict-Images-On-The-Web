@@ -36,4 +36,4 @@ This page is to predict images on the web using [keras models](https://keras.io/
 
 1. ~~detail이 아닌 create 할때 이미지 예측후 모델에 저장하기~~ -> 0504 완료
 2. ~~삭제버튼 누르면 알람후 YES or NO 추가하기~~ ->0506 완료
-3. 테마 Nav도 같이 바꾸기 설정 
+3. ~~테마 Nav도 같이 바꾸기 설정~~ ->0507 완료

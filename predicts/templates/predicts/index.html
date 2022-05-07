@@ -9,6 +9,8 @@
         zIndex : 0;
         transition : all 0.5s ;          
       }
+      
+
   </style>
 </head>
 <body>
@@ -40,14 +42,14 @@
     {% endif %}
     <hr>
   
-    <div class="row">
+    <div  class="row">
       {% for predict in predicts %}
-      <article class="col-sm-6 col-md-4">
-        <div class="card" >
+      <article id ="cardAll" class="col-sm-6 col-md-4">
+        <div class="card " >
             <a href="{% url 'predicts:detail' predict.pk %}">
           <img src="{{ predict.poster_url.url }}" id ='imgsrc' style='transform="scale(1.2)"hover;' width="370px" height="400px"  class="card-img-top" alt="...">
           </a>
-  
+        
         <div class="card-body ">
         <form class="like-form" data-predict-id="{{ predict.pk }}">
           {% csrf_token %}
@@ -67,17 +69,15 @@
         </p>
         <div>
       </div>
-  
+      <hr>
+      <h5 class="card-title">{{predict.title}}</h5>
       <div class='d-flex justify-content-between'>
-        <h5 class="card-title">{{predict.title}}</h5>
-        <h5 class="card-title">{{values}}</h5>
-        </div>
-          <a class="btn btn-success" href="{% url 'predicts:detail' predict.pk %}">상세정보</a>
-        </div>
+          <a id ='indexBtn' class="btn btn-primary" href="{% url 'predicts:detail' predict.pk %}">상세정보</a>
+          <a id ='indexBtn' class="btn btn-primary">{{predict.predict_name}}</a>
       </div>
       </article>
       {% endfor %}
-    </div>
+    </div> {% comment %} class row {% endcomment %}
   
     <script> 
       // forms : 좋아요 폼 전부 선택
