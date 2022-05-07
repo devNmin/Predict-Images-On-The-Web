@@ -1,124 +1,123 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1 class='text-center'>이미지를 예측해보세요~!</h1>
-<hr>
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src={% static  'images/header7.jpg' %} class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src={% static  'images/header8.jpg' %} class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src={% static  'images/header9.jpg' %} class="d-block w-100" alt="...">
-    </div>
-  </div>
-  {% if request.user.is_authenticated %}
-  <br>
-    <a class="btn btn-outline-primary d-flex justify-content-center" href="{% url 'predicts:create' %}">사진을 업로드 해주세요.</a>
-  {% else %}
-  <br>
-    <a class="btn btn-outline-primary d-flex justify-content-center" href="{% url 'accounts:login' %}">사진을 업로드 하려면 로그인을 해주세요.</a>
-  {% endif %}
+
+<head>
+  <style>
+      #imgsrc:hover {
+        transform : scale(1.2);
+        zIndex : 0;
+        transition : all 0.5s ;          
+      }
+  </style>
+</head>
+<body>
+  <h1 class='text-center'>이미지를 예측해보세요~!</h1>
   <hr>
-
-  <div class="row">
-    {% for predict in predicts %}
-    <article class="col-sm-6 col-md-4">
-      <div class="card" >
-          <a href="{% url 'predicts:detail' predict.pk %}">
-        <img src="{{ predict.poster_url.url }}" id ='imgsrc' onmouseenter="zoomIn(event)"
-        onmouseleave="zoomOut(event)"  width="370px" height="400px" class="card-img-top" alt="...">
-        </a>
-
-      <div class="card-body ">
-      <form class="like-form" data-predict-id="{{ predict.pk }}">
-        {% csrf_token %}
-        {% if user in predict.like_users.all %}
-          <button id="like-{{ predict.pk }}" class="btn text-danger">
-            <i class="fa-solid fa-heart"></i>
-          </button>
-        {% else %}
-          <button
-            id="like-{{ predict.pk }}"
-            class="btn text-danger"><i class="fa-regular fa-heart"></i></button>
-        {% endif %}
-      </form>
-      <p>
-        <span id="like-count-{{ predict.pk }}"> {{predict.like_users.count}}</span>
-        명이 좋아합니다.
-      </p>
-      <div>
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-
-          <div class='d-flex justify-content-between'>
-          <h5 class="card-title">{{predict.title}}</h5>
-          <h5 class="card-title">{{values}}</h5>
-          </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src={% static  'images/header7.jpg' %} class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src={% static  'images/header8.jpg' %} class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src={% static  'images/header9.jpg' %} class="d-block w-100" alt="...">
+      </div>
+    </div>
+    {% if request.user.is_authenticated %}
+    <br>
+      <a class="btn btn-outline-primary d-flex justify-content-center" href="{% url 'predicts:create' %}">사진을 업로드 해주세요.</a>
+    {% else %}
+    <br>
+      <a class="btn btn-outline-primary d-flex justify-content-center" href="{% url 'accounts:login' %}">사진을 업로드 하려면 로그인을 해주세요.</a>
+    {% endif %}
+    <hr>
+  
+    <div class="row">
+      {% for predict in predicts %}
+      <article class="col-sm-6 col-md-4">
+        <div class="card" >
+            <a href="{% url 'predicts:detail' predict.pk %}">
+          <img src="{{ predict.poster_url.url }}" id ='imgsrc' style='transform="scale(1.2)"hover;' width="370px" height="400px"  class="card-img-top" alt="...">
+          </a>
+  
+        <div class="card-body ">
+        <form class="like-form" data-predict-id="{{ predict.pk }}">
+          {% csrf_token %}
+          {% if user in predict.like_users.all %}
+            <button id="like-{{ predict.pk }}" class="btn text-danger">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+          {% else %}
+            <button
+              id="like-{{ predict.pk }}"
+              class="btn text-danger"><i class="fa-regular fa-heart"></i></button>
+          {% endif %}
+        </form>
+        <p>
+          <span id="like-count-{{ predict.pk }}"> {{predict.like_users.count}}</span>
+          명이 좋아합니다.
+        </p>
+        <div>
+      </div>
+  
+      <div class='d-flex justify-content-between'>
+        <h5 class="card-title">{{predict.title}}</h5>
+        <h5 class="card-title">{{values}}</h5>
+        </div>
           <a class="btn btn-success" href="{% url 'predicts:detail' predict.pk %}">상세정보</a>
         </div>
       </div>
-    </article>
-    {% endfor %}
-  </div>
-
-  <script>
-    document.title = 'Predicts'
-    function zoomIn(event) {
-      event.target.style.transform = "scale(1.2)"; //1.2배 확대
-      event.target.style.zIndex = 1;
-      event.target.style.transition = "all 0.5s";// 속도
-    }
-
-    function zoomOut(event) {
-      event.target.style.transform = "scale(1)";
-      event.target.style.zIndex = 0;
-      event.target.style.transition = "all 0.5s";
-    }
-
-
-    // forms : 좋아요 폼 전부 선택
-    const forms = document.querySelectorAll('.like-form')
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value
-
-    // 각각의 폼에 이벤트 리스너를 추가
-    forms.forEach(form => {
-      form.addEventListener('submit', function (event) {
-        event.preventDefault()
-
-        const { predictId } = event.target.dataset
-        
-
-        const data = {}
-        const config = {
-          headers: {
-            'X-CSRFToken': csrfToken
+      </article>
+      {% endfor %}
+    </div>
+  
+    <script> 
+      // forms : 좋아요 폼 전부 선택
+      const forms = document.querySelectorAll('.like-form')
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  
+      // 각각의 폼에 이벤트 리스너를 추가
+      forms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault()
+  
+          const { predictId } = event.target.dataset
+          
+  
+          const data = {}
+          const config = {
+            headers: {
+              'X-CSRFToken': csrfToken
+            }
           }
-        }
-        // AJAX
-        axios.post(`http://127.0.0.1:8000/predicts/${predictId}/likes/`, data, config)
-          .then(response => {
-            
-            const liked = response.data.liked
-            const count = response.data.count
-            
-            const likeButton = document.getElementById(`like-${predictId}`)
-            const likeCount = document.getElementById(`like-count-${predictId}`)
-
-            likeButton.innerHTML = liked ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>'
-            likeCount.innerText = count
-          })
+          // AJAX
+          axios.post(`http://127.0.0.1:8000/predicts/${predictId}/likes/`, data, config)
+            .then(response => {
+              
+              const liked = response.data.liked
+              const count = response.data.count
+              
+              const likeButton = document.getElementById(`like-${predictId}`)
+              const likeCount = document.getElementById(`like-count-${predictId}`)
+  
+              likeButton.innerHTML = liked ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>'
+              likeCount.innerText = count
+            })
+        })
       })
-    })
-
-
-  </script>
-
-{% endblock content %}
+  
+  
+    </script>
+  
+    
+  </body>
+  </html>
+  {% endblock content %}
