@@ -30,6 +30,7 @@ This page is to predict images on the web using [keras models](https://keras.io/
 ## 수정 & 추가
 1. [0504](./record/0504.md)
 1. [0506](./record/0506.md)
+1. [0507](./record/0507.md)
 
 ## To-do list 
 
