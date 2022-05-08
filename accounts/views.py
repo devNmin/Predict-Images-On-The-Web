@@ -4,14 +4,14 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
     AuthenticationForm, 
-    UserCreationForm, 
     PasswordChangeForm,
 )
 from django.views.decorators.http import require_http_methods, require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.contrib.auth import get_user_model
-# Create your views here.
+
+
 @require_http_methods(['GET', 'POST'])
 def login(request):
     if request.user.is_authenticated:
