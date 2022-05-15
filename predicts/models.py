@@ -12,7 +12,7 @@ class Predict(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     poster_url = models.ImageField(blank=True, upload_to='images/')
-    predict_name = models.CharField(max_length=30)
+    predict_name = models.CharField(blank=True,null=True,max_length=15)
     def __str__(self):
         return self.title
 

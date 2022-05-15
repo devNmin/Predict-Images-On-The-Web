@@ -18,11 +18,29 @@ This page is to predict images on the web using [keras models](https://keras.io/
 ## Tutorial
 
 1. ```python -m venv venv```
+
+   
+
 2. ```source venv/Scripts/activate```
-3. ``` pip install -r requirements.txt ```
+
+   
+
+3. ``` pip install -r requirements.txt``` 
+
+   
+
 4. ```python manage.py makemigrations```
+
+   
+
 5. ```python manage.py migrate```
+
+   
+
 6. ```python manage.py runserver```
+
+   
+
 7. http://127.0.0.1:8000/predicts/ 
 
 
